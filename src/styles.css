@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+	width: 100%;
+}
+
+#app {
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+button {
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
