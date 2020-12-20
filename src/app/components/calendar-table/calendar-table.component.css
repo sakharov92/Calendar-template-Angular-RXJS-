@@ -49,6 +49,7 @@ td {
 .sumCell {
 	font-size: 12px;
 	line-height: 18px;
+	max-width: fit-content;
 }
 
 .addVacationBtn {
@@ -79,3 +80,10 @@ td {
 .calendar__text {
 	padding: 2px;
 }
+
+app-table-body {
+	display: table-row-group;
+}
+
+
+

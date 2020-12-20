@@ -3,6 +3,8 @@ import {DateService} from '../../services/date.service';
 import {Day} from '../../models/day';
 import isWeekend from 'date-fns/isWeekend';
 import {format} from 'date-fns';
+import {Team} from '../../models/team';
+import {teams} from '../../../departmentTeams';
 
 @Component({
     selector: 'app-calendar-table',
@@ -12,7 +14,7 @@ import {format} from 'date-fns';
 export class CalendarTableComponent implements OnInit {
 
     // private teams: { [key in UserRealm]?: Team } = {};
-
+    teams: Team[] = teams;
     currentMonthAsDate: Date;
     currentMonthObj: Day[];
 
