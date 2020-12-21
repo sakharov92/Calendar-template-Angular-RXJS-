@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DateService} from '../../services/date.service';
+import {HttpService} from '../../services/http.service';
 import {Day} from '../../models/day';
 import isWeekend from 'date-fns/isWeekend';
 import {format} from 'date-fns';
-import {Team} from '../../models/team';
-import {teams} from '../../../departmentTeams';
 
 @Component({
     selector: 'app-calendar-table',
@@ -14,17 +13,23 @@ import {teams} from '../../../departmentTeams';
 export class CalendarTableComponent implements OnInit {
 
     // private teams: { [key in UserRealm]?: Team } = {};
-    teams: Team[] = teams;
+    teams;
     currentMonthAsDate: Date;
     currentMonthObj: Day[];
+    currentData;
 
-    constructor(private dateService: DateService) {
+    constructor(private dateService: DateService, private httpService: HttpService) {
         this.currentMonthAsDate = this.dateService.getDate();
         this.currentMonthObj = this.fillMonthObj(dateService.getDate());
         this.dateService.dateStrem.subscribe(date => {
             this.currentMonthAsDate = date;
             this.currentMonthObj = this.fillMonthObj(date);
         });
+        this.httpService.dataStream$.subscribe(data => {
+            this.currentData = data;
+            this.teams = this.currentData.data;
+        });
+
     }
 
     fillMonthObj(date: Date): Day[] {
@@ -41,6 +46,10 @@ export class CalendarTableComponent implements OnInit {
             currentMonthObj.push(day);
         }
         return currentMonthObj;
+    }
+
+    showForm() {
+        this.httpService.showForm();
     }
 
     ngOnInit() {

@@ -3,7 +3,7 @@
         <thead>
         <tr class="outputCalendar">
             <td class="addVacationCell outputItem ">
-                <button class="addVacationBtn"><span>+</span>Add Vacation</button>
+                <button class="addVacationBtn" (click)="showForm()"><span>+</span>Add Vacation</button>
             </td>
             <td *ngFor="let item of currentMonthObj" class="outputItem" [class.weekend]=item.isDayOff>
                 <div class="outputItem__wrapper">

@@ -1,27 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
 import {DateService} from './services/date.service';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BaseLayoutComponent } from './components/base-layout/base-layout.component';
-import { CalendarTableComponent } from './components/calendar-table/calendar-table.component';
-import { MonthSwitcherComponent } from './components/month-switcher/month-switcher.component';
-import { TableBodyComponent } from './components/table-body/table-body.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BaseLayoutComponent} from './components/base-layout/base-layout.component';
+import {CalendarTableComponent} from './components/calendar-table/calendar-table.component';
+import {MonthSwitcherComponent} from './components/month-switcher/month-switcher.component';
+import {TableBodyComponent} from './components/table-body/table-body.component';
+import {ModalWindowComponent} from './components/modal-window/modal-window.component';
+import {HttpService} from './services/http.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BaseLayoutComponent,
-    CalendarTableComponent,
-    MonthSwitcherComponent,
-    TableBodyComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [DateService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        BaseLayoutComponent,
+        CalendarTableComponent,
+        MonthSwitcherComponent,
+        TableBodyComponent,
+        ModalWindowComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule
+    ],
+    providers: [DateService, HttpService],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
