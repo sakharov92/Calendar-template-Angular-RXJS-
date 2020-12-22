@@ -1,7 +1,6 @@
-import {User, UserRealm} from './user';
+import {UserRealm} from './user';
 
 export interface Team {
-    realm: UserRealm;
+    name: string;
     percentageOfAbsent: number[];
-    participants: User[];
 }
