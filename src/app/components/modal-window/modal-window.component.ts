@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../services/http.service';
+import format from 'date-fns/format';
 
 @Component({
     selector: 'app-modal-window',
@@ -11,6 +12,9 @@ export class ModalWindowComponent implements OnInit {
     isLoading = true;
     isFormShown = false;
     currentData;
+    daysOff = '';
+    dateFromString;
+    dateToString;
 
     constructor(private httpService: HttpService) {
         this.httpService.dataStream$.subscribe(data => {
@@ -25,6 +29,26 @@ export class ModalWindowComponent implements OnInit {
             event.preventDefault();
             this.httpService.hideModalWindow();
         }
+    }
+
+    dateInputHandler(event) {
+        if (event.target.classList.contains('form__input-from')) {
+            this.dateFromString = event.target.value;
+        } else {
+            this.dateToString = event.target.value;
+        }
+        if (this.dateFromString && this.dateToString) {
+            let difference: number = (Number(new Date(this.dateToString)) - Number(new Date(this.dateFromString))) / (1000 * 3600 * 24);
+            if (difference < 0) {
+                [this.dateFromString, this.dateToString] = [this.dateToString, this.dateFromString];
+                difference = -difference;
+                this.daysOff = difference + ' days';
+
+            } else {
+                this.daysOff = difference + ' days';
+            }
+        }
+
     }
 
     ngOnInit() {

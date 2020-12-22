@@ -2,12 +2,12 @@
     <div *ngIf="isLoading" class="loadingWindow">
         <p class="loadingWindow__text">Loading...</p>
     </div>
-    <div *ngIf="isFormShown" class="inputForm" (click)="$event.stopPropagation()">
+    <div *ngIf="isFormShown" class="inputForm form__container" (click)="$event.stopPropagation()">
         <form class="form" id="form">
             <div class="form__header">
                 <h3 class="form__title">Vacation Request</h3>
                 <div class="form__days-counter">
-                    <p class="form__days-text">days</p>
+                    <p class="form__days-text">{{daysOff}}</p>
                 </div>
             </div>
             <div class="form__body">
@@ -17,12 +17,16 @@
                 <div class="form__inputs-group">
                     <div class="form__input-wrapper">
                         <label>
-                            <input class="form__input-from form__input" type="date" placeholder="15.06.2020">
+                            <input class="form__input-from form__input" type="date"
+                                   [value]="dateFromString"
+                                   (change)="dateInputHandler($event)">
                             From</label>
                     </div>
                     <div class="form__input-wrapper">
                         <label>
-                            <input class="form__input-to form__input" type="date" placeholder="18.06.2020">
+                            <input class="form__input-to form__input" type="date"
+                                   [value]="dateToString"
+                                   (change)="dateInputHandler($event)">
                             To</label>
                     </div>
                     <div class="form__select-wrapper">
@@ -39,6 +43,7 @@
             <div class="form__footer">
                 <button class="form__cancel-btn form__btn" type="submit" (click)="hideModalWindow($event)">Cancel
                 </button>
+                <button class="form__send-btn form__btn" (click)="$event.preventDefault()">Send</button>
             </div>
         </form>
     </div>
