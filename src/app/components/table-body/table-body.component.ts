@@ -1,3 +1,4 @@
+/*
 import {Component, Input, OnInit} from '@angular/core';
 import {UserRealm} from '../../models/user';
 
@@ -27,3 +28,4 @@ export class TableBodyComponent implements OnInit {
         this.name = Object.keys(this.userRealm).find(key => this.userRealm[key] === this.team.realm);
     }
 }
+*/

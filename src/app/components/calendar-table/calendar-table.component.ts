@@ -1,9 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {DateService} from '../../services/date.service';
-import {HttpService} from '../../services/http.service';
 import {Day} from '../../models/day';
 import isWeekend from 'date-fns/isWeekend';
 import {format} from 'date-fns';
+//import {Team} from '../../models/team';
+import {Team} from '../../models/input-data';
+import {teams} from '../../../departmentTeams';
+import { v1 as uuidv1 } from 'uuid';
+import { TeamService } from '../../services/team.service';
+import { UserService } from '../../services/user.service';
+import { VacationService } from '../../services/vacation.service';
 
 @Component({
     selector: 'app-calendar-table',
@@ -13,23 +19,21 @@ import {format} from 'date-fns';
 export class CalendarTableComponent implements OnInit {
 
     // private teams: { [key in UserRealm]?: Team } = {};
-    teams;
+    teams: Team[] = teams;
     currentMonthAsDate: Date;
     currentMonthObj: Day[];
-    currentData;
 
-    constructor(private dateService: DateService, private httpService: HttpService) {
+    constructor(
+      private dateService: DateService,
+      private teamService: TeamService,
+      private userService: UserService,
+      private vacationService: VacationService) {
         this.currentMonthAsDate = this.dateService.getDate();
         this.currentMonthObj = this.fillMonthObj(dateService.getDate());
         this.dateService.dateStrem.subscribe(date => {
             this.currentMonthAsDate = date;
             this.currentMonthObj = this.fillMonthObj(date);
         });
-        this.httpService.dataStream$.subscribe(data => {
-            this.currentData = data;
-            this.teams = this.currentData.data;
-        });
-
     }
 
     fillMonthObj(date: Date): Day[] {
@@ -48,11 +52,21 @@ export class CalendarTableComponent implements OnInit {
         return currentMonthObj;
     }
 
-    showForm() {
-        this.httpService.showForm();
-    }
-
     ngOnInit() {
+        for (let team of this.teams) {
+          const newTeamId = uuidv1();
+          const members = team.members;
+          this.teamService.addTeam(newTeamId, team.name, team.percentageOfAbsent);
+          for(let member of members) {
+            const newUserId = uuidv1();
+            this.userService.addUser(newTeamId, newUserId, member.name);
+            for (let vacation of member.vacations) {
+              const newVacationId = uuidv1();
+              this.vacationService.addVacation(newUserId, newVacationId, vacation.startDate, vacation.endDate, vacation.type);
+            }
+          }
+        }
+        debugger;
         // you need to get users
         // then construct your team by getting users, such as
         /*
