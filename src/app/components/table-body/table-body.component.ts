@@ -1,9 +1,10 @@
-/*
-import {Component, Input, OnInit} from '@angular/core';
-import {UserRealm} from '../../models/user';
+import {Component, Input, OnInit, AfterContentInit} from '@angular/core';
 
 
 import {DateService} from '../../services/date.service';
+//import { TeamService } from '../../services/team.service';
+import { DataService } from '../../services/data.service';
+import {Team} from '../../models/team';
 
 @Component({
     selector: 'app-table-body',
@@ -12,20 +13,27 @@ import {DateService} from '../../services/date.service';
 })
 export class TableBodyComponent implements OnInit {
     @Input() currentMonthObj;
-    @Input() team;
-    userRealm = UserRealm;
-    name: string;
+    @Input() teamId: string;
+    team: Team;
     date: Date;
 
-    constructor(private dateService: DateService) {
+    constructor(private dateService: DateService, private dataService: DataService) {
+        //debugger
         this.date = this.dateService.getDate();
-        this.dateService.dateStrem.subscribe(date => {
+        //this.initTeam();
+        /*this.dateService.dateStrem.subscribe(date => {
             this.date = date;
-        });
+        });*/
     }
+    initTeam() {
 
+    }
     ngOnInit() {
-        this.name = Object.keys(this.userRealm).find(key => this.userRealm[key] === this.team.realm);
+      //debugger
+      /*setTimeout(() => {
+        this.team = this.teamService.getTeamById(this.teamId);
+      });*/
+        this.team = this.dataService.getTeamById(this.teamId);
+        //this.name = Object.keys(this.userRealm).find(key => this.userRealm[key] === this.team.realm);
     }
 }
-*/

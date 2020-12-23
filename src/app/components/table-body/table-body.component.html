@@ -1,10 +1,10 @@
-<!--<tr class="mainRow {{name}}">
+<tr class="mainRow {{team.name}}">
     <td class="teamInfo">
         <div class="teamInfo__wrapper">
-            <p class="teamInfo__name">{{name}}</p>
+            <p class="teamInfo__name">{{team.name}}</p>
             <div class="teamInfo__block">
                 <i class="fas fa-users"></i>
-                <span>{{team.participants.length}}</span>
+                <!--<span>{{team.participants.length}}</span>-->
                 <div class="percent">{{team.percentageOfAbsent[date.getMonth()]}}%</div>
                 <button>
                     <i class="fas chevronBtn fa-chevron-up"></i>
@@ -14,4 +14,4 @@
     </td>
     <td class="teamInfo" *ngFor="let i of currentMonthObj"></td>
     <td class="teamInfo"></td>
-</tr>-->
+</tr>

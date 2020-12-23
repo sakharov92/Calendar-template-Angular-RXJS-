@@ -1,6 +1,6 @@
-import {Team} from './app/models/input-data';
+import { TeamInput } from './models/input-data';
 
-export const teams: Team[] = [
+export const teams: TeamInput[] = [
   {
     name: 'Frontend Team',
     percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],

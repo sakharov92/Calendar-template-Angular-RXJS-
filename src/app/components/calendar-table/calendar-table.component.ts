@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterContentInit, ChangeDetectorRef} from '@angular/core';
 import {DateService} from '../../services/date.service';
 import {Day} from '../../models/day';
 import isWeekend from 'date-fns/isWeekend';
 import {format} from 'date-fns';
-//import {Team} from '../../models/team';
-import {Team} from '../../models/input-data';
-import {teams} from '../../../departmentTeams';
+import {Team} from '../../models/team';
+import {TeamInput} from '../../models/input-data';
+//import {teams} from '../../../departmentTeams';
 import { v1 as uuidv1 } from 'uuid';
 import { TeamService } from '../../services/team.service';
-import { UserService } from '../../services/user.service';
-import { VacationService } from '../../services/vacation.service';
+import { DataService } from '../../services/data.service';
+
+/*import { UserService } from '../../services/user.service';
+import { VacationService } from '../../services/vacation.service';*/
 
 @Component({
     selector: 'app-calendar-table',
@@ -19,15 +21,18 @@ import { VacationService } from '../../services/vacation.service';
 export class CalendarTableComponent implements OnInit {
 
     // private teams: { [key in UserRealm]?: Team } = {};
-    teams: Team[] = teams;
+    //teams: TeamInput[] = teams;
     currentMonthAsDate: Date;
     currentMonthObj: Day[];
+    teamsMap: Map<string, Team>;
 
     constructor(
       private dateService: DateService,
-      private teamService: TeamService,
-      private userService: UserService,
-      private vacationService: VacationService) {
+      private dataService: DataService
+      //public teamService: TeamService,
+      /*private userService: UserService,
+      private vacationService: VacationService*/) {
+        //this.teamsMap = dataService.getTeams();
         this.currentMonthAsDate = this.dateService.getDate();
         this.currentMonthObj = this.fillMonthObj(dateService.getDate());
         this.dateService.dateStrem.subscribe(date => {
@@ -53,7 +58,9 @@ export class CalendarTableComponent implements OnInit {
     }
 
     ngOnInit() {
-        for (let team of this.teams) {
+      //debugger
+      this.teamsMap = this.dataService.teams;
+        /*for (let team of this.teams) {
           const newTeamId = uuidv1();
           const members = team.members;
           this.teamService.addTeam(newTeamId, team.name, team.percentageOfAbsent);
@@ -66,7 +73,8 @@ export class CalendarTableComponent implements OnInit {
             }
           }
         }
-        debugger;
+        this.teamsMap = this.teamService.getTeams();*/
+        //debugger;
         // you need to get users
         // then construct your team by getting users, such as
         /*
