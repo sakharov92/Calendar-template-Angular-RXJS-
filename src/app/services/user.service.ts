@@ -3,13 +3,11 @@ import { User } from '../models/user';
 
 @Injectable()
 export class UserService {
-  private users: {id: User} | {} = {};
+  private users: Map<string, User> = new Map();
   private associativeWithTeamList: {teamId: string[]} | {} = {};
 
   addUser(teamId, userId, name): void {
-    this.users[userId] = {
-      name, teamId
-    };
+    this.users.set(userId, {name, teamId});
     this.associateWithTeam(teamId, userId);
   }
   associateWithTeam(teamId, userId): void {

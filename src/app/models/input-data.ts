@@ -1,4 +1,4 @@
-export interface Team {
+export interface TeamInput {
   name: string;
   percentageOfAbsent: number[];
   members: User[];
