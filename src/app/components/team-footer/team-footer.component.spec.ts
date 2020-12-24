@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarTableComponent } from './calendar-table.component';
+import { TeamFooterComponent } from './team-footer.component';
 
-describe('CalendarTableComponent', () => {
-  let component: CalendarTableComponent;
-  let fixture: ComponentFixture<CalendarTableComponent>;
+describe('TeamFooterComponent', () => {
+  let component: TeamFooterComponent;
+  let fixture: ComponentFixture<TeamFooterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarTableComponent ]
+      declarations: [ TeamFooterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalendarTableComponent);
+    fixture = TestBed.createComponent(TeamFooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

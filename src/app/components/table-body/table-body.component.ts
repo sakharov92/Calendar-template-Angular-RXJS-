@@ -1,9 +1,8 @@
-import {Component, Input, OnInit, AfterContentInit} from '@angular/core';
-
+import {Component, Input, OnInit} from '@angular/core';
 
 import {DateService} from '../../services/date.service';
-//import { TeamService } from '../../services/team.service';
-import { DataService } from '../../services/data.service';
+import { TeamService } from '../../services/team.service';
+import { UserService } from '../../services/user.service';
 import {Team} from '../../models/team';
 
 @Component({
@@ -12,28 +11,26 @@ import {Team} from '../../models/team';
     styleUrls: ['./table-body.component.css']
 })
 export class TableBodyComponent implements OnInit {
-    @Input() currentMonthObj;
-    @Input() teamId: string;
+    @Input() teamId: number;
     team: Team;
+    participants: number[];
     date: Date;
 
-    constructor(private dateService: DateService, private dataService: DataService) {
-        //debugger
-        this.date = this.dateService.getDate();
-        //this.initTeam();
-        /*this.dateService.dateStrem.subscribe(date => {
-            this.date = date;
-        });*/
-    }
-    initTeam() {
-
+    constructor(private teamService: TeamService, private userService: UserService, private dateService: DateService ) {
     }
     ngOnInit() {
+      this.date = this.dateService.getDate();
+      this.dateService.dateStrem.subscribe(date => {
+        this.date = date;
+      });
+      this.team = this.teamService.getTeamById(this.teamId);
+      this.participants = this.userService.getUsers().reduce((accumulator, currentValue) => {
+        if  (currentValue.teamId === this.teamId) {
+          accumulator.push(currentValue.id);
+        }
+        return accumulator;
+      }, []);
       //debugger
-      /*setTimeout(() => {
-        this.team = this.teamService.getTeamById(this.teamId);
-      });*/
-        this.team = this.dataService.getTeamById(this.teamId);
-        //this.name = Object.keys(this.userRealm).find(key => this.userRealm[key] === this.team.realm);
+      //this.name = Object.keys(this.userRealm).find(key => this.userRealm[key] === this.team.realm);
     }
 }
