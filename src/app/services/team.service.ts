@@ -1,18 +1,41 @@
 import {Injectable} from '@angular/core';
 import { Team } from '../models/team';
+import {Subject} from 'rxjs';
+import lastDayOfMonth from 'date-fns/lastDayOfMonth';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class TeamService {
-  private teams: Map<string, Team>  = new Map();
-  addTeam(id, name, percentageOfAbsent) {
-    this.teams.set(id, {name, percentageOfAbsent});
-  }
-  getTeams(): Map<string, Team> {
+  statisticList: number[];
+  private teams: Team[] = [
+    {
+      name: 'Frontend Team',
+      percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],
+      id: 1
+    },
+    {
+      name: 'Design Team',
+      percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],
+      id: 2
+    },
+    {
+      name: 'Backend Team',
+      percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],
+      id: 3
+    },
+    {
+      name: 'Managers Team',
+      percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],
+      id: 4
+    }
+  ];
+  getTeams(): Team[] {
     return this.teams;
   }
-  getTeamById(teamId: string): Team {
-    return this.teams.get(teamId);
+  getTeamById(teamId): Team {
+    return this.teams.find((element) => {
+      return teamId === element.id;
+    });
   }
+
 }

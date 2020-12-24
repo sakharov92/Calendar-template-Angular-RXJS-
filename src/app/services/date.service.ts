@@ -5,13 +5,14 @@ import lastDayOfMonth from 'date-fns/lastDayOfMonth';
 @Injectable()
 export class DateService {
     // date: some Subject (or BehaviourSubject<Date>)
-
+    teamStatisticStream: Subject<number>;
     dateStrem: Subject<Date>;
     date: Date = new Date();
 
     constructor() {
         this.date = lastDayOfMonth(this.date);
         this.dateStrem = new Subject();
+        this.teamStatisticStream = new Subject();
         this.dateStrem.subscribe(date => this.date = date);
     }
 

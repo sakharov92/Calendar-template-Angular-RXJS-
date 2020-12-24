@@ -1,21 +1,58 @@
 import {Injectable} from '@angular/core';
 import { User } from '../models/user';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class UserService {
-  private users: Map<string, User> = new Map();
-  private associativeWithTeamList: {teamId: string[]} | {} = {};
-
-  addUser(teamId, userId, name): void {
-    this.users.set(userId, {name, teamId});
-    this.associateWithTeam(teamId, userId);
+  private users: User[] = [
+    {
+      id: 1,
+      name: 'FE_Team_User1',
+      teamId: 1
+    },
+    {
+      id: 2,
+      name: 'FE_Team_User2',
+      teamId: 1
+    },
+    {
+      id: 3,
+      name: 'Des_Team_User1',
+      teamId: 2
+    },
+    {
+      id: 4,
+      name: 'Des_Team_User2',
+      teamId: 2
+    },
+    {
+      id: 5,
+      name: 'BE_Team_User1',
+      teamId: 3
+    },
+    {
+      id: 6,
+      name: 'BE_Team_User2',
+      teamId: 3
+    },
+    {
+      id: 7,
+      name: 'Man_Team_User1',
+      teamId: 4
+    },
+    {
+      id: 8,
+      name: 'Man_Team_User2',
+      teamId: 4
+    },
+  ];
+  getUsers(): User[] {
+    return this.users;
   }
-  associateWithTeam(teamId, userId): void {
-    if (this.associativeWithTeamList.hasOwnProperty(teamId)) {
-     this.associativeWithTeamList[teamId].push(userId);
-    } else {
-      this.associativeWithTeamList[teamId] = [userId];
-    }
+  getUserById(userId): User {
+    return this.users.find((element) => {
+      return userId === element.id;
+    });
   }
   // getUsers(): Observable<User[]> {}
 

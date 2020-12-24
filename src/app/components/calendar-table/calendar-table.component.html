@@ -14,9 +14,16 @@
             <td class="sumCell outputItem"><span class="calendar__text">Sum</span></td>
         </tr>
         </thead>
-        <app-table-body *ngFor="let teamId of dataService.getTeams().keys()"
-                        [currentMonthObj]="currentMonthObj"
-                        [teamId]="teamId"></app-table-body>
+        <!--<tbody *ngFor="let team of teamsList"
+               [date]="currentMonthAsDate"
+               [teamId]="team.id">
+
+        </tbody>-->
+
+        <app-table-body *ngFor="let team of teamsList" [teamId]="team.id"></app-table-body>
+        <tr class="teamsFooter"></tr>
+                        <!--[date]="currentMonthAsDate"-->
+
         <!--    <tbody check that teamEntity is exist>-->
         <!--    <tr get team of teamEntities>-->
         <!--      <div class="calendar__row-inner">-->

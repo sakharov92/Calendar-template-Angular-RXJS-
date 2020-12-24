@@ -8,7 +8,8 @@ export enum UserRealm {
 }
 
 export interface User {
+  id: number;
   name: string;
-  teamId: string;
+  teamId: number;
   //vacations: Array<Vacation>;
 }

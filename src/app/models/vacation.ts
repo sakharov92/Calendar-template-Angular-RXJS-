@@ -1,6 +1,12 @@
 export interface Vacation {
+  id: number;
   startDate: string;
   endDate: string;
-  type: string;
+  userId: number;
+  isPaid: boolean;
+}
+export interface AvailableDates {
+  availableDatesList: Set<string>;
+  isPaid: boolean;
 }
 
