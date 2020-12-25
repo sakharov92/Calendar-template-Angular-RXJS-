@@ -15,10 +15,12 @@ export class TableBodyComponent implements OnInit {
   team: RowTeam;
   participants: number[];
   date: Date;
+  ready = false;
 
   constructor(private teamService: TeamService, private userService: UserService, private dateService: DateService ) {
   }
   ngOnInit() {
+
     this.date = this.dateService.getDate();
     this.dateService.dateStrem.subscribe(date => {
       this.date = date;
