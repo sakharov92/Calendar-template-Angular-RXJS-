@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {DateService} from '../../services/date.service';
 import {HttpService} from '../../services/http.service';
 import {Day} from '../../models/day';
+import {RowTeam} from '../../models/team';
 import isWeekend from 'date-fns/isWeekend';
 import {format} from 'date-fns';
+import { TeamService } from '../../services/team.service';
 
 @Component({
     selector: 'app-calendar-table',
@@ -12,24 +14,15 @@ import {format} from 'date-fns';
 })
 export class CalendarTableComponent implements OnInit {
 
-    // private teams: { [key in UserRealm]?: Team } = {};
     teams;
+    teamsList: RowTeam[];
     currentMonthAsDate: Date;
     currentMonthObj: Day[];
     currentData;
 
-    constructor(private dateService: DateService, private httpService: HttpService) {
-        this.currentMonthAsDate = this.dateService.getDate();
-        this.currentMonthObj = this.fillMonthObj(dateService.getDate());
-        this.dateService.dateStrem.subscribe(date => {
-            this.currentMonthAsDate = date;
-            this.currentMonthObj = this.fillMonthObj(date);
-        });
-        this.httpService.dataStream$.subscribe(data => {
-            this.currentData = data;
-            this.teams = this.currentData.data;
-        });
-
+    constructor(private dateService: DateService,
+                private httpService: HttpService,
+                private teamService: TeamService) {
     }
 
     fillMonthObj(date: Date): Day[] {
@@ -53,29 +46,18 @@ export class CalendarTableComponent implements OnInit {
     }
 
     ngOnInit() {
-        // you need to get users
-        // then construct your team by getting users, such as
-        /*
-        * this.teams[user.realm] = {
-              realm: user.realm,
-              participants: []
-            };
-        * */
-        // and then add users to teams, such as
-        /*
-        * if (user.realm in this.teams) {
-            this.teams[user.realm].participants.push(user);
-          }
-        * */
-        // for now you should be have a teams
+      this.teamsList = this.teamService.getTeams();
+      this.currentMonthAsDate = this.dateService.getDate();
+      this.currentMonthObj = this.fillMonthObj(this.dateService.getDate());
+      this.dateService.dateStrem.subscribe(date => {
+        this.currentMonthAsDate = date;
+        this.currentMonthObj = this.fillMonthObj(date);
+      });
+      this.httpService.dataStream$.subscribe(data => {
+        this.currentData = data;
+        this.teams = this.currentData.data;
+      });
     }
 
-    // get teamsEntity(): Team[] {}
-
-    // monthDaysEntity(): Day[] {}
-
-    // generateMonth(date: Date): Month {} // should to get month
-
-    // you can create the structure yourself too
 
 }

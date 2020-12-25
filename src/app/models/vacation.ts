@@ -3,6 +3,10 @@ export interface Vacation {
   startDate: string;
   endDate: string;
   userId: number;
-  isPaid: string;
+  isPaid: boolean;
+}
+export interface AvailableDates {
+  availableDatesList: Set<string>;
+  isPaid: boolean;
 }
 

@@ -11,6 +11,13 @@ import {TableBodyComponent} from './components/table-body/table-body.component';
 import {ModalWindowComponent} from './components/modal-window/modal-window.component';
 import {HttpService} from './services/http.service';
 
+import { StatisticService } from './services/statistic.service';
+import { TeamFooterComponent } from './components/team-footer/team-footer.component';
+import { VacationService } from './services/vacation.service';
+import { TeamUserComponent } from './components/team-user/team-user.component';
+import { UserService } from './services/user.service';
+import { TeamService } from './services/team.service';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -18,13 +25,22 @@ import {HttpService} from './services/http.service';
         CalendarTableComponent,
         MonthSwitcherComponent,
         TableBodyComponent,
-        ModalWindowComponent
+        ModalWindowComponent,
+        TeamFooterComponent,
+        TeamUserComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule
     ],
-    providers: [DateService, HttpService],
+    providers: [
+      DateService,
+      HttpService,
+      StatisticService,
+      VacationService,
+      UserService,
+      TeamService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

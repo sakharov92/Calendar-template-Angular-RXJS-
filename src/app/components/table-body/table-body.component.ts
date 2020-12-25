@@ -1,29 +1,34 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserRealm} from '../../models/user';
-
 
 import {DateService} from '../../services/date.service';
+import { TeamService } from '../../services/team.service';
+import { UserService } from '../../services/user.service';
+import {RowTeam} from '../../models/team';
 
 @Component({
-    selector: 'app-table-body',
-    templateUrl: './table-body.component.html',
-    styleUrls: ['./table-body.component.css']
+  selector: 'app-table-body',
+  templateUrl: './table-body.component.html',
+  styleUrls: ['./table-body.component.css']
 })
 export class TableBodyComponent implements OnInit {
-    @Input() currentMonthObj;
-    @Input() team;
-    userRealm = UserRealm;
-    name: string;
-    date: Date;
+  @Input() teamId: number;
+  team: RowTeam;
+  participants: number[];
+  date: Date;
 
-    constructor(private dateService: DateService) {
-        this.date = this.dateService.getDate();
-        this.dateService.dateStrem.subscribe(date => {
-            this.date = date;
-        });
-    }
-
-    ngOnInit() {
-        this.name = Object.keys(this.userRealm).find(key => this.userRealm[key] === this.team.realm);
-    }
+  constructor(private teamService: TeamService, private userService: UserService, private dateService: DateService ) {
+  }
+  ngOnInit() {
+    this.date = this.dateService.getDate();
+    this.dateService.dateStrem.subscribe(date => {
+      this.date = date;
+    });
+    this.team = this.teamService.getTeamById(this.teamId);
+    this.participants = this.userService.getUsers().reduce((accumulator, currentValue) => {
+      if  (currentValue.teamId === this.teamId) {
+        accumulator.push(currentValue.id);
+      }
+      return accumulator;
+    }, []);
+  }
 }

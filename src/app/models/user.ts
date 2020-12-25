@@ -11,3 +11,8 @@ export interface User {
   role: string;
   realm: UserRealm;
 }
+export interface RowUser {
+  id: number;
+  name: string;
+  teamId: number;
+}

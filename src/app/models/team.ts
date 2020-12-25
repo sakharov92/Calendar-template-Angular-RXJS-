@@ -5,3 +5,9 @@ export interface Team {
     percentageOfAbsent: number[];
     participants: User[];
 }
+export interface RowTeam {
+  name: string;
+  percentageOfAbsent: number[];
+  id: number;
+}
+
