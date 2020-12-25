@@ -18,6 +18,7 @@ export class TeamUserComponent implements OnInit {
   lastDayOfMonth: Date;
   user: User;
   dayCells: CellInfo[] = [];
+  vacationSum = 0;
   constructor(
     private userService: UserService,
     private vacationService: VacationService,
@@ -28,6 +29,8 @@ export class TeamUserComponent implements OnInit {
     this.user = this.userService.getUserById(this.userId);
     this.dayCells = this.fillDayCells(this.userId, this.lastDayOfMonth);
     this.dateService.dateStrem.subscribe(date => {
+      this.dayCells = [];
+      this.vacationSum = 0;
       this.lastDayOfMonth = date;
       this.dayCells = this.fillDayCells(this.userId , this.lastDayOfMonth);
     });
@@ -37,11 +40,14 @@ export class TeamUserComponent implements OnInit {
     }
     this.showVacationInfoText(this.dayCells);*/
   }
+  increaseVacationSumByOne(): void {
+    this.vacationSum += 1;
+  }
   fillDayCells(userId, lastDayOfMonth): CellInfo[] {
     const dayCells: CellInfo[] = [];
     const vacationsFiltered: AvailableDates[] = this.vacationService.generateVacationSetsByUserId(userId, lastDayOfMonth);
     for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
-      this.dateService.teamStatisticStream.next(i - 1);
+      //this.dateService.teamStatisticStream.next(i - 1);
       const iDate: Date = new Date(lastDayOfMonth.getFullYear(), lastDayOfMonth.getMonth(), i);
       dayCells.push(this.getCellInfo(iDate, vacationsFiltered));
     }
@@ -65,7 +71,10 @@ export class TeamUserComponent implements OnInit {
       const vacationUiStart = vacationItemEntries[0];
       const vacationUiEnd = vacationItemEntries[vacationItemEntries.length - 1];
       if (vacationItem.availableDatesList.has(cellDate)) {
-        cellInfo.isVacation = true;
+        if (!cellInfo.isWeekend) {
+          cellInfo.isVacation = true;
+          this.increaseVacationSumByOne();
+        }
         if (cellDate === vacationUiStart) {
           cellInfo.isUiStart = true;
           //this.component.className += " vacation-cell_ui-start";

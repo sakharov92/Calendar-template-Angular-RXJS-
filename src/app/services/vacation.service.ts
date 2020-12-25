@@ -88,7 +88,7 @@ export class VacationService {
     {
       id: 12,
       startDate: '20.02.2021',
-      endDate: '20.02.2021',
+      endDate: '22.02.2021',
       userId: 6,
       isPaid: false
     },
