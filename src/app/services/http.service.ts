@@ -45,7 +45,7 @@ export class HttpService {
                 isFormShown: this.isFormSHown
             }
         );
-    }
+    };
 
     hideModalWindow = () => {
         this.isFormSHown = false;
@@ -57,6 +57,6 @@ export class HttpService {
                 isFormShown: this.isFormSHown
             }
         );
-    }
+    };
 
 }
