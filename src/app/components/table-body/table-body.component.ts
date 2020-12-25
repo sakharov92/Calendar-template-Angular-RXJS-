@@ -30,7 +30,5 @@ export class TableBodyComponent implements OnInit {
         }
         return accumulator;
       }, []);
-      //debugger
-      //this.name = Object.keys(this.userRealm).find(key => this.userRealm[key] === this.team.realm);
     }
 }

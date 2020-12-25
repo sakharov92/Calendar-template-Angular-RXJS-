@@ -1,12 +1,9 @@
 import {Injectable} from '@angular/core';
 import { Team } from '../models/team';
-import {Subject} from 'rxjs';
-import lastDayOfMonth from 'date-fns/lastDayOfMonth';
 
 
 @Injectable()
 export class TeamService {
-  statisticList: number[];
   private teams: Team[] = [
     {
       name: 'Frontend Team',

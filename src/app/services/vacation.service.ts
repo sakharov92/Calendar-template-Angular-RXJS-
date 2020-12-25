@@ -136,7 +136,4 @@ export class VacationService {
       return userId === element.userId;
     });
   }
-  // getVacations(): Observable<Vacation[]> {}
-
-  // getVacationById(): Observable<Vacation>
 }

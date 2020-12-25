@@ -195,10 +195,6 @@ app-table-body:nth-child(5) .vacation-cell_unpaid.vacation-cell_type-text:after 
 .vacation-cell_paid.vacation-cell_type-text_left_l:after {
   left: 28px;
 }
-.calendar {
-  max-width: 1345px;
-  padding: 15px;
-}
 td {
   border: 1px solid #D7D7D7;
 }

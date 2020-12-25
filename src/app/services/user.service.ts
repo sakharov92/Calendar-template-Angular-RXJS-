@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import { User } from '../models/user';
-import {Subject} from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -54,7 +53,4 @@ export class UserService {
       return userId === element.id;
     });
   }
-  // getUsers(): Observable<User[]> {}
-
-  // getUserById(): Observable<User>
 }

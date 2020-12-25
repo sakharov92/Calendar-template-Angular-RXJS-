@@ -23,7 +23,7 @@ export class StatisticService {
       this.teamStatisticList[index] += 1;
     }
   }
-  fillStatisticsList(date) {
+  fillStatisticsList(date): (string|number)[]  {
     const statisticsList = [];
     for (let i = 1; i <= date.getDate(); i++) {
       const iDate: Date = new Date(date.getFullYear(), date.getMonth(), i);

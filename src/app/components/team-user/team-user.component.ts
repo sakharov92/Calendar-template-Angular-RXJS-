@@ -20,7 +20,6 @@ export class TeamUserComponent implements OnInit {
   user: User;
   dayCells: CellInfo[] = [];
   vacationSum = 0;
-  teamStatisticList: (string|number)[];
   constructor(
     private userService: UserService,
     private vacationService: VacationService,
@@ -29,20 +28,13 @@ export class TeamUserComponent implements OnInit {
 
   ngOnInit() {
     this.lastDayOfMonth =  this.dateService.getDate();
-    //this.teamStatisticList = this.statisticService.getStatistic();
     this.user = this.userService.getUserById(this.userId);
     this.dayCells = this.fillDayCells(this.userId, this.lastDayOfMonth);
     this.dateService.dateStrem.subscribe(date => {
-      //this.teamStatisticList = this.statisticService.getStatistic();
       this.vacationSum = 0;
       this.lastDayOfMonth = date;
       this.dayCells = this.fillDayCells(this.userId , this.lastDayOfMonth);
     });
-   /* for (let i = 1; i <= this.lastDayOfMonth.getDate(); i++) {
-      const iDate: Date = new Date(this.lastDayOfMonth.getFullYear(), this.lastDayOfMonth.getMonth(), i);
-      this.dayCells.push(this.getCellInfo(iDate, this.vacationsFiltered));
-    }
-    this.showVacationInfoText(this.dayCells);*/
   }
   increaseVacationSumByOne(): void {
     this.vacationSum += 1;
@@ -51,7 +43,6 @@ export class TeamUserComponent implements OnInit {
     const dayCells: CellInfo[] = [];
     const vacationsFiltered: AvailableDates[] = this.vacationService.generateVacationSetsByUserId(userId, lastDayOfMonth);
     for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
-      //this.dateService.teamStatisticStream.next(i - 1);
       const iDate: Date = new Date(lastDayOfMonth.getFullYear(), lastDayOfMonth.getMonth(), i);
       const cellInfo: CellInfo = this.getCellInfo(iDate, vacationsFiltered);
       if (cellInfo.isVacation && !cellInfo.isWeekend) {
@@ -80,16 +71,12 @@ export class TeamUserComponent implements OnInit {
       const vacationUiStart = vacationItemEntries[0];
       const vacationUiEnd = vacationItemEntries[vacationItemEntries.length - 1];
       if (vacationItem.availableDatesList.has(cellDate)) {
-        //if (!cellInfo.isWeekend) {
-          cellInfo.isVacation = true;
-        //}
+        cellInfo.isVacation = true;
         if (cellDate === vacationUiStart) {
           cellInfo.isUiStart = true;
-          //this.component.className += " vacation-cell_ui-start";
         }
         if (cellDate === vacationUiEnd) {
           cellInfo.isUiEnd = true;
-          //this.component.className += " vacation-cell_ui-end";
         }
         if (!!vacationItem.isPaid) {
           cellInfo.isPaid = true;
