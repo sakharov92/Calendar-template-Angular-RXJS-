@@ -6,10 +6,8 @@
                 <button class="addVacationBtn" (click)="showForm()"><span>+</span>Add Vacation</button>
             </td>
             <td *ngFor="let item of currentMonthObj" class="outputItem" [class.weekend]=item.isDayOff>
-                <div class="outputItem__wrapper">
                     <span class="outputDay">{{item.dayName}}</span>
                     <span class="outputDate">{{item.date.getDate()}}</span>
-                </div>
             </td>
             <td class="sumCell outputItem"><span class="calendar__text">Sum</span></td>
         </tr>

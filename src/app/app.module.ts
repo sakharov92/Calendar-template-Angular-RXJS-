@@ -17,6 +17,7 @@ import { UserService } from './services/user.service';
 import { TeamUserComponent } from './components/team-user/team-user.component';
 import { VacationService } from './services/vacation.service';
 import { TeamFooterComponent } from './components/team-footer/team-footer.component';
+import { StatisticService } from './services/statistic.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TeamFooterComponent } from './components/team-footer/team-footer.compon
     DateService,
     TeamService,
     UserService,
-    VacationService
+    VacationService,
+    StatisticService
     //DateService,
     /*TeamService,
     UserService,

@@ -2,7 +2,7 @@
 	width: 230px;
 	display: flex;
 	justify-content: space-between;
-	margin: 30px;
+	margin: 30px auto;
 }
 .month-switcher__month{
 	padding: 10px;

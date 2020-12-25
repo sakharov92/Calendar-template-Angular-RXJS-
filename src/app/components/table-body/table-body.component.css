@@ -114,6 +114,3 @@ tbody tr {
 .mainRow.BACK_END {
 	border-left: 3px solid #ff9999;
 }
-.users {
-  display: table-row-group;
-}
