@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import { RowUser } from '../models/user';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class UserService {
-  private users: RowUser[] = [
+  private users: RowUser[];
+  /*private users: RowUser[] = [
     {
       id: 1,
       name: 'FE_Team_User1',
@@ -44,7 +46,10 @@ export class UserService {
       name: 'Man_Team_User2',
       teamId: 4
     },
-  ];
+  ];*/
+  constructor(private httpService: HttpService) {
+    this.users = this.httpService.getDataByName('users');
+  }
   getUsers(): RowUser[] {
     return this.users;
   }

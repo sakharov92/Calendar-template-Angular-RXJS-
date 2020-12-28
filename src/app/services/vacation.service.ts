@@ -1,9 +1,11 @@
 import {Vacation, AvailableDates} from '../models/vacation';
 import {Injectable} from '@angular/core';
+import {HttpService} from './http.service';
 
 @Injectable()
 export class VacationService {
-  private vacations: Vacation[] = [
+  private vacations: Vacation[];
+  /*private vacations: Vacation[] = [
     {
       id: 1,
       startDate: '25.11.2020',
@@ -93,7 +95,10 @@ export class VacationService {
       isPaid: false
     },
 
-  ];
+  ];*/
+  constructor(private httpService: HttpService) {
+      this.vacations = this.httpService.getDataByName('vacations');
+  }
   formatInputDate(stringDate: string): Date {
     return new Date(
       parseInt(stringDate.slice(6, 10), 10),

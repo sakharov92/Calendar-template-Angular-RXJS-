@@ -56,6 +56,7 @@ export class CalendarTableComponent implements OnInit {
       this.httpService.dataStream$.subscribe(data => {
         this.currentData = data;
         this.teams = this.currentData.data;
+        console.log(this.teams);
       });
     }
 

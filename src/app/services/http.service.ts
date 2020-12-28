@@ -1,15 +1,19 @@
 import {Injectable, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
-import {teams} from '../../departmentTeams';
-import {Team} from '../models/team';
-
+/*import {teams} from '../../departmentTeams';
+import {Team} from '../models/team';*/
+import { departmentTeams } from '../../inputData';
+import { InputData } from '../models/inputData';
+import { RowTeam } from '../models/team';
+import { RowUser } from '../models/user';
+import { Vacation } from '../models/vacation';
 
 @Injectable()
 export class HttpService {
     isLoading: boolean;
     isFormSHown: boolean;
     dataStream$: Subject<object> = new Subject();
-    data: Team[];
+    data: InputData;
 
     constructor() {
         this.isLoading = true;
@@ -17,7 +21,7 @@ export class HttpService {
         setTimeout(() => {
             fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
-                body: JSON.stringify([teams]),
+                body: JSON.stringify([departmentTeams]),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
@@ -34,6 +38,12 @@ export class HttpService {
                 });
         }, 2000);
     }
+    getDataByName(dataName: 'teams'): RowTeam[];
+    getDataByName(dataName: 'users'): RowUser[];
+    getDataByName(dataName: 'vacations'): Vacation[];
+    getDataByName(dataName: string): any {
+        return this.data[dataName];
+    }
 
     showForm = () => {
         this.isFormSHown = true;
@@ -45,7 +55,7 @@ export class HttpService {
                 isFormShown: this.isFormSHown
             }
         );
-    };
+    }
 
     hideModalWindow = () => {
         this.isFormSHown = false;
@@ -57,6 +67,6 @@ export class HttpService {
                 isFormShown: this.isFormSHown
             }
         );
-    };
+    }
 
 }
