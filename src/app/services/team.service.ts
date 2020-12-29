@@ -5,7 +5,7 @@ import { HttpService } from './http.service';
 
 @Injectable()
 export class TeamService {
-  private teams: RowTeam[];
+  teams: RowTeam[];
   currentData;
   /*private teams: RowTeam[] = [
     {
@@ -29,15 +29,25 @@ export class TeamService {
       id: 4
     }
   ];*/
-  constructor(private httpService: HttpService) {
-      this.teams = this.httpService.getDataByName('teams');
-  }
+  /*constructor(private httpService: HttpService) {
+      //this.teams = this.httpService.getDataByName('teams');
+    //this.teams = this.httpService.data.teams;
+  }*/
+  /*constructor(private httpService: HttpService) {
+    this.httpService.dataStream$.subscribe(data => {
+      this.currentData = data;
+      this.teams = this.currentData.data.teams;
+    });
+  }*/
   /*constructor(private httpService: HttpService) {
     this.httpService.dataStream$.subscribe(data => {
       //this.currentData = data;
       this.teams = this.httpService.getDataByName('teams');
     });
   }*/
+  setTeams(teams): void {
+    this.teams = teams;
+  }
   getTeams(): RowTeam[] {
     return this.teams;
   }

@@ -42,6 +42,8 @@ export class TeamUserComponent implements OnInit {
   fillDayCells(userId, lastDayOfMonth): CellInfo[] {
     const dayCells: CellInfo[] = [];
     const vacationsFiltered: AvailableDates[] = this.vacationService.generateVacationSetsByUserId(userId, lastDayOfMonth);
+    //this.setToZeroVacationSum();
+    //this.statisticService.setToZeroStatistic(this.lastDayOfMonth);
     for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
       const iDate: Date = new Date(lastDayOfMonth.getFullYear(), lastDayOfMonth.getMonth(), i);
       const cellInfo: CellInfo = this.getCellInfo(iDate, vacationsFiltered);

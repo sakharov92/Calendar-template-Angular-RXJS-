@@ -4,7 +4,8 @@ import { HttpService } from './http.service';
 
 @Injectable()
 export class UserService {
-  private users: RowUser[];
+  users: RowUser[];
+  currentData;
   /*private users: RowUser[] = [
     {
       id: 1,
@@ -47,8 +48,18 @@ export class UserService {
       teamId: 4
     },
   ];*/
-  constructor(private httpService: HttpService) {
-    this.users = this.httpService.getDataByName('users');
+  /*constructor(private httpService: HttpService) {
+    //this.users = this.httpService.getDataByName('users');
+    //this.users = this.httpService.data.users;
+  }*/
+  /*constructor(private httpService: HttpService) {
+    this.httpService.dataStream$.subscribe(data => {
+      this.currentData = data;
+      this.users = this.currentData.data.users;
+    });
+  }*/
+  setUsers(users): void {
+    this.users = users;
   }
   getUsers(): RowUser[] {
     return this.users;

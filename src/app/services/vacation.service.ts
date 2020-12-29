@@ -4,7 +4,7 @@ import {HttpService} from './http.service';
 
 @Injectable()
 export class VacationService {
-  private vacations: Vacation[];
+  vacations: Vacation[];
   /*private vacations: Vacation[] = [
     {
       id: 1,
@@ -96,8 +96,18 @@ export class VacationService {
     },
 
   ];*/
-  constructor(private httpService: HttpService) {
-      this.vacations = this.httpService.getDataByName('vacations');
+  /*constructor(private httpService: HttpService) {
+      //this.vacations = this.httpService.getDataByName('vacations');
+    //this.vacations =  this.httpService.data.vacations;
+  }*/
+  /*constructor(private httpService: HttpService) {
+    this.httpService.dataStream$.subscribe(data => {
+      this.currentData = data;
+      this.vacations = this.currentData.data.vacations;
+    });
+  }*/
+  setVacations(vacations) {
+    this.vacations = vacations;
   }
   formatInputDate(stringDate: string): Date {
     return new Date(

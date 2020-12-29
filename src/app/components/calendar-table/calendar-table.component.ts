@@ -13,12 +13,9 @@ import { TeamService } from '../../services/team.service';
     styleUrls: ['./calendar-table.component.css']
 })
 export class CalendarTableComponent implements OnInit {
-
-    teams;
     teamsList: RowTeam[];
     currentMonthAsDate: Date;
     currentMonthObj: Day[];
-    currentData;
 
     constructor(private dateService: DateService,
                 private httpService: HttpService,
@@ -46,19 +43,14 @@ export class CalendarTableComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.teamsList = this.teamService.getTeams();
       this.currentMonthAsDate = this.dateService.getDate();
       this.currentMonthObj = this.fillMonthObj(this.dateService.getDate());
       this.dateService.dateStrem.subscribe(date => {
         this.currentMonthAsDate = date;
         this.currentMonthObj = this.fillMonthObj(date);
       });
-      this.httpService.dataStream$.subscribe(data => {
-        this.currentData = data;
-        this.teams = this.currentData.data;
-        console.log(this.teams);
+      this.httpService.dataStream$.subscribe(() => {
+        this.teamsList = this.teamService.getTeams();
       });
     }
-
-
 }

@@ -23,6 +23,9 @@ export class StatisticService {
       this.teamStatisticList[index] += 1;
     }
   }
+  /*setToZeroStatistic(date) {
+    this.teamStatisticList = this.fillStatisticsList(date);
+  }*/
   fillStatisticsList(date): (string|number)[]  {
     const statisticsList = [];
     for (let i = 1; i <= date.getDate(); i++) {

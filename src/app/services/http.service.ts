@@ -1,21 +1,24 @@
 import {Injectable, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
-/*import {teams} from '../../departmentTeams';
-import {Team} from '../models/team';*/
 import { departmentTeams } from '../../inputData';
 import { InputData } from '../models/inputData';
-import { RowTeam } from '../models/team';
-import { RowUser } from '../models/user';
-import { Vacation } from '../models/vacation';
+import { TeamService } from './team.service';
+import { UserService } from './user.service';
+import { VacationService } from './vacation.service';
 
 @Injectable()
 export class HttpService {
     isLoading: boolean;
     isFormSHown: boolean;
+    modalStream$: Subject<object> = new Subject();
     dataStream$: Subject<object> = new Subject();
     data: InputData;
 
-    constructor() {
+    constructor(
+      private teamService: TeamService,
+      private userService: UserService,
+      private vacationService: VacationService
+    ) {
         this.isLoading = true;
         this.isFormSHown = false;
         setTimeout(() => {
@@ -30,27 +33,23 @@ export class HttpService {
                 .then((json) => {
                     this.data = json[0];
                     this.isLoading = false;
-                    this.dataStream$.next({
-                        data: this.data,
-                        isLoading: this.isLoading,
-                        isFormShown: this.isFormSHown
+                    this.teamService.setTeams(this.data.teams);
+                    this.vacationService.setVacations(this.data.vacations);
+                    this.userService.setUsers(this.data.users);
+                    this.modalStream$.next({
+                      isLoading: this.isLoading,
+                      isFormShown: this.isFormSHown
                     });
+                    this.dataStream$.next();
                 });
         }, 2000);
-    }
-    getDataByName(dataName: 'teams'): RowTeam[];
-    getDataByName(dataName: 'users'): RowUser[];
-    getDataByName(dataName: 'vacations'): Vacation[];
-    getDataByName(dataName: string): any {
-        return this.data[dataName];
     }
 
     showForm = () => {
         this.isFormSHown = true;
         this.isLoading = false;
-        this.dataStream$.next(
+        this.modalStream$.next(
             {
-                data: this.data,
                 isLoading: this.isLoading,
                 isFormShown: this.isFormSHown
             }
@@ -60,13 +59,11 @@ export class HttpService {
     hideModalWindow = () => {
         this.isFormSHown = false;
         this.isLoading = false;
-        this.dataStream$.next(
+        this.modalStream$.next(
             {
-                data: this.data,
                 isLoading: this.isLoading,
                 isFormShown: this.isFormSHown
             }
         );
     }
-
 }

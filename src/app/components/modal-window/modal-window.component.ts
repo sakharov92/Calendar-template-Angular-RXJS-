@@ -17,7 +17,7 @@ export class ModalWindowComponent implements OnInit {
     dateToString;
 
     constructor(private httpService: HttpService) {
-        this.httpService.dataStream$.subscribe(data => {
+        this.httpService.modalStream$.subscribe(data => {
             this.currentData = data;
             this.isLoading = this.currentData.isLoading;
             this.isFormShown = this.currentData.isFormShown;

@@ -6,16 +6,10 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./base-layout.component.css']
 })
 export class BaseLayoutComponent implements OnInit {
-    ready = false;
 
     constructor() {
     }
 
     ngOnInit() {
-        setTimeout(() => {
-                this.ready = !this.ready;
-            },
-            2500
-        );
     }
 }
