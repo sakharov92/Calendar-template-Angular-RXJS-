@@ -24,10 +24,6 @@ button {
 	outline: none;
 }
 
-app-table-body {
-	z-index: -1;
-}
-
 app-table-body:nth-child(2) .employeeКRow,
 app-table-body:nth-child(2) .mainRow {
 	border-left: 3px solid rgb(155, 153, 255);
@@ -76,7 +72,6 @@ app-table-body:nth-child(5) .percent {
 
 .vacation-cell_paid:before,
 .vacation-cell_unpaid:before {
-	z-index: -1;
 	content: '';
 	display: block;
 	position: relative;
@@ -101,7 +96,7 @@ app-table-body:nth-child(5) .percent {
 
 .vacation-cell_paid.vacation-cell_ui-start:before,
 .vacation-cell_unpaid.vacation-cell_ui-start:before {
-	
+
 	border-radius: 3px 0 0 3px;
 }
 
@@ -182,22 +177,18 @@ app-table-body:nth-child(5) .vacation-cell_unpaid:before {
 
 app-table-body:nth-child(2) .vacation-cell_unpaid.vacation-cell_type-text:after {
 	color: rgb(155, 153, 255);
-	z-index: -1;
 }
 
 app-table-body:nth-child(3) .vacation-cell_unpaid.vacation-cell_type-text:after {
 	color: rgb(122, 175, 255);
-	z-index: -1;
 }
 
 app-table-body:nth-child(4) .vacation-cell_unpaid.vacation-cell_type-text:after {
 	color: rgb(255, 153, 153);
-	z-index: -1;
 }
 
 app-table-body:nth-child(5) .vacation-cell_unpaid.vacation-cell_type-text:after {
 	color: rgb(255, 167, 104);
-	z-index: -1;
 }
 
 .type-text {
@@ -206,7 +197,6 @@ app-table-body:nth-child(5) .vacation-cell_unpaid.vacation-cell_type-text:after 
 	font-size: 12px;
 	display: inline;
 	top: -23px;
-	z-index: 1;
 }
 
 .vacation-cell_unpaid.vacation-cell_type-text:after {
@@ -216,7 +206,6 @@ app-table-body:nth-child(5) .vacation-cell_unpaid.vacation-cell_type-text:after 
 .vacation-cell_paid.vacation-cell_type-text:after {
 	content: 'Pd';
 	color: #fff;
-	z-index: -1;
 }
 
 .vacation-cell_type-text:after {
