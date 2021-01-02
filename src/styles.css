@@ -120,7 +120,6 @@ app-table-body:nth-child(5) .percent {
 	max-width: 34px;
 	left: 1px;
 	border-radius: 3px;
-	margin-right: 1px;
 }
 
 app-table-body:nth-child(2) .vacation-cell_paid:before {
@@ -220,11 +219,11 @@ app-table-body:nth-child(5) .vacation-cell_unpaid.vacation-cell_type-text:after 
 }
 
 .vacation-cell_unpaid.vacation-cell_type-text_left_s:after {
-	left: 3px;
+	left: 4px;
 }
 
 .vacation-cell_unpaid.vacation-cell_type-text_left_l:after {
-	left: 20px;
+	left: 26px;
 }
 
 .vacation-cell_paid.vacation-cell_type-text_left_s:after {
@@ -232,7 +231,7 @@ app-table-body:nth-child(5) .vacation-cell_unpaid.vacation-cell_type-text:after 
 }
 
 .vacation-cell_paid.vacation-cell_type-text_left_l:after {
-	left: 28px;
+	left: 33px;
 }
 
 td {

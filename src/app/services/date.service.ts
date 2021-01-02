@@ -4,8 +4,6 @@ import lastDayOfMonth from 'date-fns/lastDayOfMonth';
 
 @Injectable()
 export class DateService {
-    // date: some Subject (or BehaviourSubject<Date>)
-
     dateStrem: Subject<Date>;
     date: Date = new Date();
 
@@ -16,8 +14,6 @@ export class DateService {
     }
 
     getDate = () => this.date;
-
-    // switchMonth(direction) {}
     switchMonth(direction: number): void {
         if (direction === -1) {
             this.dateStrem.next(new Date(this.date.getFullYear(), this.date.getMonth(), 0));

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../services/http.service';
-import format from 'date-fns/format';
 
 @Component({
     selector: 'app-modal-window',
