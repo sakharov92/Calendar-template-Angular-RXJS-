@@ -1,9 +1,9 @@
 <div class="month-switcher">
-    <button class="month-switcher__btn" (click)="switchMonth(-1)">
+    <button class="month-switcher__btn" (click)="switchMonth('prev')">
         <i class="fas fa-arrow-left"></i>
     </button>
     <span class="month-switcher__month">{{currentMonth}} {{currentYear}}</span>
-    <button class="month-switcher__btn" (click)="switchMonth(1)">
+    <button class="month-switcher__btn" (click)="switchMonth('next')">
         <i class="fas fa-arrow-right"></i>
     </button>
 </div>

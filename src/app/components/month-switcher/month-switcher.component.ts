@@ -12,6 +12,9 @@ export class MonthSwitcherComponent implements OnInit {
     currentYear: number;
 
     constructor(private dateService: DateService) {
+    }
+
+    ngOnInit() {
         this.currentMonth = format(this.dateService.getDate(), 'MMMM');
         this.currentYear = this.dateService.getDate().getFullYear();
         this.dateService.dateStrem.subscribe(date => {
@@ -20,11 +23,7 @@ export class MonthSwitcherComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
-    }
-
-// get date from service and displaying to the template
-    switchMonth(direction: number): void {
+    switchMonth(direction: string): void {
         this.dateService.switchMonth(direction);
     }
 }

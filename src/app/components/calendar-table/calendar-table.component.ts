@@ -5,7 +5,8 @@ import {Day} from '../../models/day';
 import {RowTeam} from '../../models/team';
 import isWeekend from 'date-fns/isWeekend';
 import {format} from 'date-fns';
-import { TeamService } from '../../services/team.service';
+import {TeamService} from '../../services/team.service';
+import {ModalWindowAndFormService} from '../../services/modalWindowAndForm.service';
 
 @Component({
     selector: 'app-calendar-table',
@@ -19,7 +20,8 @@ export class CalendarTableComponent implements OnInit {
 
     constructor(private dateService: DateService,
                 private httpService: HttpService,
-                private teamService: TeamService) {
+                private teamService: TeamService,
+                private modalWindowAndFormService: ModalWindowAndFormService) {
     }
 
     fillMonthObj(date: Date): Day[] {
@@ -39,18 +41,18 @@ export class CalendarTableComponent implements OnInit {
     }
 
     showForm() {
-        this.httpService.showForm();
+        this.modalWindowAndFormService.showForm();
     }
 
     ngOnInit() {
-      this.currentMonthAsDate = this.dateService.getDate();
-      this.currentMonthObj = this.fillMonthObj(this.dateService.getDate());
-      this.dateService.dateStrem.subscribe(date => {
-        this.currentMonthAsDate = date;
-        this.currentMonthObj = this.fillMonthObj(date);
-      });
-      this.httpService.dataStream$.subscribe(() => {
-        this.teamsList = this.teamService.getTeams();
-      });
+        this.currentMonthAsDate = this.dateService.getDate();
+        this.currentMonthObj = this.fillMonthObj(this.dateService.getDate());
+        this.dateService.dateStrem.subscribe(date => {
+            this.currentMonthAsDate = date;
+            this.currentMonthObj = this.fillMonthObj(date);
+        });
+        this.httpService.dataStream$.subscribe(() => {
+            this.teamsList = this.teamService.getTeams();
+        });
     }
 }

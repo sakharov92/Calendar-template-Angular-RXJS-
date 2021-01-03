@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../services/http.service';
+import {ModalWindowAndFormService} from '../../services/modalWindowAndForm.service';
 
 @Component({
     selector: 'app-modal-window',
@@ -15,8 +16,11 @@ export class ModalWindowComponent implements OnInit {
     dateFromString;
     dateToString;
 
-    constructor(private httpService: HttpService) {
-        this.httpService.modalStream$.subscribe(data => {
+    constructor(private httpService: HttpService, private modalWindowAndFormService: ModalWindowAndFormService) {
+    }
+
+    ngOnInit() {
+        this.modalWindowAndFormService.modalStream$.subscribe(data => {
             this.currentData = data;
             this.isLoading = this.currentData.isLoading;
             this.isFormShown = this.currentData.isFormShown;
@@ -26,7 +30,7 @@ export class ModalWindowComponent implements OnInit {
     hideModalWindow(event) {
         if (!this.isLoading) {
             event.preventDefault();
-            this.httpService.hideModalWindow();
+            this.modalWindowAndFormService.hideModalWindow();
         }
     }
 
@@ -48,9 +52,6 @@ export class ModalWindowComponent implements OnInit {
             }
         }
 
-    }
-
-    ngOnInit() {
     }
 
 }
